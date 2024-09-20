@@ -6,8 +6,15 @@ namespace Nackademin_Episerver.Models.Pages
     [ContentType(
         GUID = "1900F9AC-4BA2-4472-8CDC-BA8804C9793F",
         GroupName = GroupNames.Specialized
-        )]
+    )]
     [ImageUrl("/pages/CMS-icon-page-02.png")]
+    [AvailableContentTypes(
+        Availability.Specific,
+        Include =
+        [
+            typeof(SettingsPage)
+        ]
+    )]
     public class StartPage : SitePageData
     {
         [Display(
