@@ -1,0 +1,18 @@
+﻿@using Nackademin_Episerver.Models.Pages
+@using Nackademin_Episerver.Models.ViewModels
+@model IPageViewModel<SitePageData>
+
+<!DOCTYPE html>
+
+<html lang="@Model.CurrentPage.Language">
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@Html.Raw(Model.CurrentPage.MetaTitle)</title>
+    <meta name="description" content="Put your description here."
+</head>
+<body>
+    <div>
+        @RenderBody()
+    </div>
+</body>
+</html>
