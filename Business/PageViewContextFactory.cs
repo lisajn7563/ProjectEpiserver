@@ -17,8 +17,6 @@ namespace Nackademin_Episerver.Business
             _logger = logger;
         }
 
-        public ILogger<PageViewContextFactory> Logger { get; }
-
         public virtual LayoutModel CreateLayoutModel (ContentReference contentReference, HttpContext httpContext)
         {
             var startPageContentLink = SiteDefinition.Current.StartPage;

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Nackademin_Episerver.Models.Blocks;
+using System.ComponentModel.DataAnnotations;
 using static Nackademin_Episerver.Globals;
 
 namespace Nackademin_Episerver.Models.Pages
@@ -12,8 +13,10 @@ namespace Nackademin_Episerver.Models.Pages
         Availability.Specific,
         Include =
         [
-            typeof(SettingsPage)
-        ]
+            typeof(SettingsPage),
+			typeof(ContainerPage)
+
+		]
     )]
     public class StartPage : SitePageData
     {
@@ -30,5 +33,17 @@ namespace Nackademin_Episerver.Models.Pages
         )]
         [CultureSpecific]
         public virtual XhtmlString MainBody { get; set; }
-    }
+
+		[Display(
+	        GroupName = SystemTabNames.Content,
+	        Order = 30,
+            Name = "Slideshow",
+            Description = ""
+        )]
+        [AllowedTypes(
+            typeof(SlideshowPage),
+            typeof(SlideshowBlock)
+        )]
+		public virtual ContentArea Content { get; set; }
+	}
 }

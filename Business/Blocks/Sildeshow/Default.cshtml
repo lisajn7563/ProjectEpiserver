@@ -1,0 +1,12 @@
+﻿@using EPiServer.Web.Mvc.Html
+@using EPiServer.Web.Routing
+@using Nackademin_Episerver.Business.Blocks.Sildeshow
+@model SlideshowBlockViewModel
+
+@if (Model.Pages != null)
+{
+    foreach(var item in Model.Pages)
+    {
+        <img src="@Url.ContentUrl(item.Image)"/>
+    }
+}
