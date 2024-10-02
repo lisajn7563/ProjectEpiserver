@@ -4,6 +4,7 @@ using EPiServer.Scheduler;
 using EPiServer.ServiceLocation;
 using EPiServer.Web.Routing;
 using Nackademin_Episerver.Business.Extensions;
+using Nackademin_Episerver.Business.Services;
 
 namespace Nackademin_Episerver
 {
@@ -31,6 +32,8 @@ namespace Nackademin_Episerver
                 .AddNackademin()
                 .AddAdminUserRegistration()
                 .AddEmbeddedLocalization<Startup>();
+
+            services.AddScoped<IMovieService, MovieService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -48,6 +51,11 @@ namespace Nackademin_Episerver
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapContent();
+
+                endpoints.MapControllerRoute(
+        name: "search",
+        pattern: "search/{query?}",
+        defaults: new { controller = "SearchPage", action = "SearchMovie" });
             });
         }
     }

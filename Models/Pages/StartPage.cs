@@ -14,9 +14,10 @@ namespace Nackademin_Episerver.Models.Pages
         Include =
         [
             typeof(SettingsPage),
-			typeof(ContainerPage)
+			typeof(ContainerPage),
+            typeof(SearchPage)
 
-		]
+        ]
     )]
     public class StartPage : SitePageData
     {
