@@ -44,6 +44,15 @@ namespace Nackademin_Episerver
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseStatusCodePages(async context =>
+            {
+                if (context.HttpContext.Response.StatusCode == 404)
+                {
+                    context.HttpContext.Response.Redirect("/error");
+
+                    await Task.Yield();
+                }
+            });
 
             app.UseStaticFiles();
             app.UseRouting();

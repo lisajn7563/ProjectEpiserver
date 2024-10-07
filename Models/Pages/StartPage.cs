@@ -16,7 +16,8 @@ namespace Nackademin_Episerver.Models.Pages
             typeof(SettingsPage),
 			typeof(ContainerPage),
             typeof(SearchPage),
-            typeof(XmlSitemap)
+            typeof(XmlSitemap),
+            typeof(ErrorPage)
         ]
     )]
     public class StartPage : SitePageData
