@@ -6,6 +6,10 @@ namespace Nackademin_Episerver
     {
         public static void Main(string[] args)
         {
+            var s = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+            var t = s;
+
+
             Log.Logger = new LoggerConfiguration()
            .ReadFrom.Configuration(Configuration).WriteTo.Console().CreateLogger();
 
@@ -21,9 +25,17 @@ namespace Nackademin_Episerver
         .Build();
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureCmsDefaults()
-                .UseSerilog()
-                .ConfigureWebHostDefaults(webBuilder => webBuilder.UseStartup<Startup>());
+
+         Host.CreateDefaultBuilder(args)
+             .ConfigureCmsDefaults()
+             .UseSerilog()
+             .ConfigureAppConfiguration((ctx, builder) =>
+             {
+                 builder.AddConfiguration(Configuration);
+             })
+             .ConfigureWebHostDefaults(webBuilder =>
+             {
+                 webBuilder.UseStartup<Startup>();
+             });
     }
 }

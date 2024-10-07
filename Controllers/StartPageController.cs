@@ -6,7 +6,7 @@ namespace Nackademin_Episerver.Controllers
 {
     public class StartPageController : PageControllerBase<StartPage>
     {
-        public ActionResult Index(StartPage currentPage)
+        public IActionResult Index(StartPage currentPage)
         {
             var model = new StartPageViewModel(currentPage);
 

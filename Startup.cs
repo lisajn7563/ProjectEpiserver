@@ -33,7 +33,9 @@ namespace Nackademin_Episerver
                 .AddAdminUserRegistration()
                 .AddEmbeddedLocalization<Startup>();
 
+            services.AddHttpContextAccessor();
             services.AddScoped<IMovieService, MovieService>();
+            services.AddSingleton<IXmlSitemapService, XmlSitemapService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

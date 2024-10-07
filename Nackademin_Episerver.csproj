@@ -19,13 +19,36 @@
     <PackageReference Include="Serilog.AspNetCore" Version="8.0.2" />
     <PackageReference Include="Serilog.Formatting.Compact" Version="3.0.0" />
     <PackageReference Include="Serilog.Sinks.File" Version="6.0.0" />
+    <PackageReference Include="SlowCheetah" Version="2.5.48" />
   </ItemGroup>
   
   <ItemGroup>
     <EmbeddedResource Include="Resources\Translations\**\*" />
   </ItemGroup>
-  
-  <ItemGroup>
-    <Folder Include="wwwroot\" />
-  </ItemGroup>
+
+	<ItemGroup>
+		<ScFilesToTransform Include="appsettings.json">
+			<TransformOnBuild>true</TransformOnBuild>
+			<TransformFile>appsettings.%(Configuration).json</TransformFile>
+			<!-- Specify the transform file -->
+			<Link>appsettings.json</Link>
+			<!-- Ensure Link is defined -->
+			<DestinationFile>appsettings.json</DestinationFile>
+			<!-- Specify the destination file -->
+		</ScFilesToTransform>
+		<ScFilesToTransform Include="appsettings..json">
+			<TransformOnBuild>true</TransformOnBuild>
+			<TransformFile>appsettings.%(Configuration).json</TransformFile>
+			<!-- Specify the transform file -->
+			<Link>appsettings..json</Link>
+			<!-- Ensure Link is defined -->
+			<DestinationFile>appsettings.*.json</DestinationFile>
+			<!-- Specify the destination file -->
+		</ScFilesToTransform>
+	</ItemGroup>
+
+	<Target Name="TransformConfig" AfterTargets="Build">
+		<SlowCheetah.TransformTask Source="@(ScFilesToTransform)" Transform="%(ScFilesToTransform.Identity).config" Destination="%(ScFilesToTransform.Identity)" Condition="Exists('%(ScFilesToTransform.Identity).config')" />
+	</Target>
+	
 </Project>
